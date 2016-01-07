@@ -1,5 +1,8 @@
 Beta channel
 ============
+
+#FORK of Mycelium Bitcoin Wallet for Android without Google Play Services dependency
+
 In order to receive updates quicker than others, you need to do two things:
 
 1. Join the G+ group so you are eligible for testing:
