@@ -45,7 +45,6 @@ import android.content.pm.PackageManager;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Vibrator;
-import android.support.annotation.Nullable;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.WindowManager;
@@ -1078,7 +1077,6 @@ public class MbwManager {
       return _walletManager.getAccount(uuid);
    }
 
-   @Nullable
    private UUID getLastSelectedAccountId() {
       // Get the selected account ID
       String uuidStr = getPreferences().getString(SELECTED_ACCOUNT, "");

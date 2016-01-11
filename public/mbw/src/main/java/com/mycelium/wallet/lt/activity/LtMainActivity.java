@@ -52,8 +52,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.common.base.Optional;
 import com.google.common.base.Preconditions;
 import com.mrd.bitlib.crypto.InMemoryPrivateKey;
@@ -214,7 +212,6 @@ public class LtMainActivity extends ActionBarActivity {
 
    @Override
    protected void onStart() {
-      checkGooglePlayServices();
       _ltManager.subscribe(ltSubscriber);
       _ltManager.startMonitoringTrader();
       super.onStart();
@@ -341,25 +338,6 @@ public class LtMainActivity extends ActionBarActivity {
 //         Utils.showOptionalMessage(this, R.string.lt_welcome_message);
 //      }
 //   }
-
-   /**
-    * figure out whether Google Play Services are available and act accordingly
-    */
-   private boolean checkGooglePlayServices() {
-      int result = GooglePlayServicesUtil.isGooglePlayServicesAvailable(this);
-      if (result == ConnectionResult.SERVICE_MISSING || result == ConnectionResult.SERVICE_VERSION_UPDATE_REQUIRED
-            || result == ConnectionResult.SERVICE_DISABLED) {
-         GooglePlayServicesUtil.getErrorDialog(result, this, 0).show();
-         return false;
-      } else if (result != ConnectionResult.SUCCESS) {
-         // Warn about degraded notifications
-         Utils.showOptionalMessage(this, R.string.lt_google_play_services_not_available);
-         return false;
-      } else {
-         _ltManager.initializeGooglePlayServices();
-         return true;
-      }
-   }
 
    private Tab enumToTab(TAB_TYPE tabType) {
       switch (tabType) {

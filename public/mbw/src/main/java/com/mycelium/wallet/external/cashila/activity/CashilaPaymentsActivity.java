@@ -39,7 +39,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -154,7 +153,7 @@ public class CashilaPaymentsActivity extends ActionBarActivity implements Action
    }
 
    @Override
-   protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
+   protected void onRestoreInstanceState(Bundle savedInstanceState) {
       super.onRestoreInstanceState(savedInstanceState);
       warningsShown = savedInstanceState.getBoolean(WARNINGS_SHOWN);
    }

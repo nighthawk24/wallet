@@ -49,7 +49,6 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Build;
-import android.support.annotation.StringRes;
 import android.text.ClipboardManager;
 import android.text.format.DateFormat;
 import android.view.LayoutInflater;
@@ -99,7 +98,6 @@ import com.mycelium.wapi.wallet.currency.ExactBitcoinValue;
 import com.mycelium.wapi.wallet.single.SingleAddressAccount;
 import org.ocpsoft.prettytime.PrettyTime;
 
-import javax.annotation.Nullable;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
@@ -269,7 +267,7 @@ public class Utils {
     * or the back button to make it disappear.
     */
    public static void showSimpleMessageDialog(final Context context, String message, final Runnable okayRunner,
-                                              @StringRes int okayButtonText, final Runnable postRunner) {
+                                              int okayButtonText, final Runnable postRunner) {
       LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
       final View layout = inflater.inflate(R.layout.simple_message_dialog, null);
       AlertDialog.Builder builder = new AlertDialog.Builder(context).setView(layout);
@@ -686,9 +684,8 @@ public class Utils {
 
    public static List<WalletAccount> sortAccounts(List<WalletAccount> accounts, final MetadataStorage storage) {
       Ordering<WalletAccount> type = Ordering.natural().onResultOf(new Function<WalletAccount, Integer>() {
-         @Nullable
          @Override
-         public Integer apply(@Nullable WalletAccount input) {
+         public Integer apply(WalletAccount input) {
             if (input instanceof Bip44Account) {
                return 0;
             }
@@ -702,9 +699,8 @@ public class Utils {
          }
       });
       Ordering<WalletAccount> index = Ordering.natural().onResultOf(new Function<WalletAccount, Integer>() {
-         @Nullable
          @Override
-         public Integer apply(@Nullable WalletAccount input) {
+         public Integer apply(WalletAccount input) {
             if (input instanceof Bip44Account) {
                Bip44Account bip44Account = (Bip44Account) input;
                return bip44Account.getAccountIndex();
@@ -714,9 +710,8 @@ public class Utils {
       });
 
       Ordering<WalletAccount> name = Ordering.natural().onResultOf(new Function<WalletAccount, String>() {
-         @Nullable
          @Override
-         public String apply(@Nullable WalletAccount input) {
+         public String apply(WalletAccount input) {
             return storage.getLabelByAccount(input.getId());
          }
       });

@@ -111,7 +111,6 @@ public class CoinapultManager implements AccountProvider {
       return account;
    }
 
-   @android.support.annotation.Nullable
    private UUID enableCurrency(String currency) {
       if (CoinapultAccount.Currency.all.containsKey(currency)) {
          CoinapultAccount.Currency currencyAccount = CoinapultAccount.Currency.all.get(currency);
@@ -157,7 +156,6 @@ public class CoinapultManager implements AccountProvider {
       return newAccount.getId();
    }
 
-   @android.support.annotation.Nullable
    private CoinapultAccount getAccountForCurrency(CoinapultAccount.Currency currency) {
       for (CoinapultAccount account : coinapultAccounts.values()) {
          if (account.getCoinapultCurrency().equals(currency)) {
@@ -167,7 +165,6 @@ public class CoinapultManager implements AccountProvider {
       return null;
    }
 
-   @android.support.annotation.Nullable
    private CoinapultAccount getAccountForCurrency(String currency) {
       if (CoinapultAccount.Currency.all.containsKey(currency)) {
          CoinapultAccount.Currency currencyAccount = CoinapultAccount.Currency.all.get(currency);

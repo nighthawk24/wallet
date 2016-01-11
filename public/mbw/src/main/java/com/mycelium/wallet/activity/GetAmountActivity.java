@@ -38,7 +38,6 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -311,7 +310,7 @@ public class GetAmountActivity extends Activity implements NumberEntryListener {
    }
 
    @Override
-   public void onSaveInstanceState(@NonNull Bundle savedInstanceState) {
+   public void onSaveInstanceState(Bundle savedInstanceState) {
       super.onSaveInstanceState(savedInstanceState);
       savedInstanceState.putSerializable(ENTERED_AMOUNT, _amount);
    }

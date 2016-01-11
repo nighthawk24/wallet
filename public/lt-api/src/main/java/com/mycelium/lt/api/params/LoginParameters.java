@@ -34,22 +34,6 @@ public class LoginParameters {
       this.signature = signature;
    }
 
-   public String getGcmId() {
-      return gcmId;
-   }
-
-   public void setGcmId(String gcmId) {
-      this.gcmId = gcmId;
-   }
-
-   public long getLastTradeSessionChange() {
-      return lastTradeSessionChange;
-   }
-
-   public void setLastTradeSessionChange(long lastTradeSessionChange) {
-      this.lastTradeSessionChange = lastTradeSessionChange;
-   }
-
    @SuppressWarnings("unused")
    private LoginParameters() {
       // For Jackson

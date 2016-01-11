@@ -40,7 +40,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.annotation.NonNull;
 import android.view.View;
 import android.widget.TextView;
 import com.btchip.BTChipDongle.BTChipOutput;
@@ -215,7 +214,6 @@ public class LedgerSignTransactionActivity extends SignTransactionActivity {
       pin.show();
    }
 
-   @NonNull
    private String convertPin2Fa(String pin) {
       try {
          byte[] binaryPin = new byte[pin.length()];

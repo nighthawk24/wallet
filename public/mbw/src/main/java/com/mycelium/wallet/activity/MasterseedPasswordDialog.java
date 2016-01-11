@@ -36,7 +36,6 @@ package com.mycelium.wallet.activity;
 
 import android.app.DialogFragment;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -58,7 +57,7 @@ public class MasterseedPasswordDialog extends DialogFragment {
    }
 
    @Override
-   public void onSaveInstanceState(@NonNull Bundle outState) {
+   public void onSaveInstanceState(Bundle outState) {
       super.onSaveInstanceState(outState);
       outState.putString("pwd", ((EditText) getDialog().findViewById(R.id.etPassphrase)).getText().toString());
    }

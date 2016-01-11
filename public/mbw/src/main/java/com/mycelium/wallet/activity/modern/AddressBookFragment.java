@@ -42,7 +42,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.support.annotation.LayoutRes;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.view.ActionMode;
@@ -291,7 +290,7 @@ public class AddressBookFragment extends Fragment {
 
       private int resource;
 
-      public AddressBookAdapter(Context context,@LayoutRes int resource, List<Entry> entries) {
+      public AddressBookAdapter(Context context, int resource, List<Entry> entries) {
          super(context, resource, entries);
          this.resource = resource;
       }

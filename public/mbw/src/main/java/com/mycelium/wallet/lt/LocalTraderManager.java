@@ -37,12 +37,7 @@ package com.mycelium.wallet.lt;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager.NameNotFoundException;
 import android.util.Log;
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.GooglePlayServicesUtil;
-import com.google.android.gms.gcm.GoogleCloudMessaging;
 import com.google.common.base.Preconditions;
 import com.megiontechnologies.Bitcoins;
 import com.mrd.bitlib.crypto.InMemoryPrivateKey;
@@ -65,12 +60,9 @@ import com.mycelium.wallet.lt.api.CreateTrade;
 import com.mycelium.wallet.lt.api.Request;
 import com.mycelium.wallet.persistence.TradeSessionDb;
 
-import java.io.IOException;
 import java.util.*;
 
 public class LocalTraderManager {
-
-   public static final String GCM_SENDER_ID = "1025080855849";
 
    private static final String TAG = "LocalTraderManager";
    public static final String LT_DERIVATION_SEED = "lt.mycelium.com";
@@ -305,7 +297,6 @@ public class LocalTraderManager {
          try {
             // Login
             LoginParameters params = new LoginParameters(getLocalTraderAddress(), sigHashSessionId);
-            params.setGcmId(getGcmRegistrationId());
             _api.traderLogin(_session.id, params).getResult();
             _isLoggedIn = true;
             return true;
@@ -708,79 +699,6 @@ public class LocalTraderManager {
          return _session == null ? true : _session.captcha.contains(LtSession.CaptchaCommands.CREATE_INSTANT_BUY_ORDER);
       }
       return false;
-   }
-
-   public void initializeGooglePlayServices() {
-      if (GooglePlayServicesUtil.isGooglePlayServicesAvailable(_context) != ConnectionResult.SUCCESS) {
-         return;
-      }
-      if (getGcmRegistrationId() == null) {
-         // Get the GCM ID in a background thread
-         new Thread(new Runnable() {
-            @Override
-            public void run() {
-               GoogleCloudMessaging gcm = GoogleCloudMessaging.getInstance(_context);
-               try {
-                  String regId = gcm.register(LocalTraderManager.GCM_SENDER_ID);
-                  storeGcmRegistrationId(regId);
-               } catch (IOException e) {
-                  Log.w(TAG, "IO exception while getting GCM ID:" + e.getMessage());
-               }
-            }
-         }).start();
-      }
-   }
-
-   private synchronized String getGcmRegistrationId() {
-      final SharedPreferences prefs = getGcmPreferences();
-      String registrationId = prefs.getString("gcmid", null);
-      if (registrationId == null) {
-         Log.i(TAG, "GCM registration not found.");
-         return null;
-      }
-      // Check if app was updated; if so, it must clear the registration ID
-      // since the existing regID is not guaranteed to work with the new
-      // app version.
-      int registeredVersion = prefs.getInt("appVersion", Integer.MIN_VALUE);
-      int currentVersion = getAppVersion();
-      if (registeredVersion != currentVersion) {
-         Log.i(TAG, "App version changed.");
-         return null;
-      }
-      return registrationId;
-   }
-
-   /**
-    * Stores the registration ID and app versionCode in the application's
-    * {@code SharedPreferences}.
-    *
-    * @param regId registration ID
-    */
-   private synchronized void storeGcmRegistrationId(String regId) {
-      final SharedPreferences prefs = getGcmPreferences();
-      int appVersion = getAppVersion();
-      Log.i(TAG, "Saving regId on app version " + appVersion);
-      SharedPreferences.Editor editor = prefs.edit();
-      editor.putString("gcmid", regId);
-      editor.putInt("appVersion", appVersion);
-      editor.commit();
-   }
-
-   /**
-    * @return Application's version code from the {@code PackageManager}.
-    */
-   private int getAppVersion() {
-      try {
-         PackageInfo packageInfo = _context.getPackageManager().getPackageInfo(_context.getPackageName(), 0);
-         return packageInfo.versionCode;
-      } catch (NameNotFoundException e) {
-         // should never happen
-         throw new RuntimeException("Could not get package name: " + e);
-      }
-   }
-
-   private SharedPreferences getGcmPreferences() {
-      return _context.getSharedPreferences(Constants.LOCAL_TRADER_GCM_SETTINGS_NAME, Activity.MODE_PRIVATE);
    }
 
    public LtApi getApi(){
