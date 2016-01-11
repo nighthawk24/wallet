@@ -3,14 +3,6 @@ Beta channel
 
 #FORK of Mycelium Bitcoin Wallet for Android without Google Play Services dependency
 
-In order to receive updates quicker than others, you need to do two things:
-
-1. Join the G+ group so you are eligible for testing:
-   https://plus.google.com/communities/102264813364583686576
-
-2. Then explicitly enable beta versions of the software at:
-   https://play.google.com/apps/testing/com.mycelium.wallet
-
 As Beta Testers, please make sure you have a recent **backup of the masterseed** and all **private keys** inside Mycelium. Beta testers will experience many bugs. So far, restoring the wallet from masterseed has never been necessary, but we offer no guarantees.
 
 Building
@@ -31,36 +23,9 @@ Then you need to use the Android SDK manager to install the following components
  * Android Extras:
     * Android Support Repository rev 5
     * Android Support Library rev 19.1
-    * Google Play services for Froyo rev 12
-    * Google Play services rev 17
-    * Google Repository rev 8
 
 
 The project layout is designed to be used with a recent version of Android Studio (currently 1.1.0)
-
-####Build commands
-
-On the console type:
-
-    git clone https://github.com/mycelium-com/wallet.git
-    cd wallet
-
-Linux/Mac type:
-
-    ./gradlew build
-
-Windows type:
-
-    gradlew.bat build
-
- - Voila, look into `wallet/public/mbw/build/apk` to see the generated apk. 
-   There are versions for both prodnet and testnet.
-
-Alternatively you can install the latest version from the Play store at:
-
-https://play.google.com/store/apps/details?id=com.mycelium.wallet
-
-If you cannot access the Play store, you can obtain the apk directly from https://mycelium.com/bitcoinwallet
 
 Features
 ========
@@ -80,14 +45,10 @@ With the Mycelium Bitcoin Wallet you can send and receive Bitcoins using your mo
  - Secure your wallet with a PIN
  - Compatible with other bitcoin services through the `bitcoin:` URI scheme
  
-
 Please note that bitcoin is still experimental and this app comes with no warranty - while we make sure to adhere to the highest standards of software craftsmanship we can not exclude that the software contains bugs. Please make sure you have backups of your private keys and do not use this for more than you are willing to lose.
 
-This application's source is published at https://github.com/mycelium-com/wallet
-We need your feedback. If you have a suggestion or a bug to report open an issue at: https://github.com/mycelium-com/wallet/issues
-
 More features:
- - Sources available for review:  https://github.com/mycelium-com/wallet
+ - Sources available for review
  - Multiple HD accounts, privat keys, external xPub or xPriv accounts
  - Multiple Bitcoin denominations: BTC, mBTC, bits and uBTC
  - View your balance in multiple fiat currencies: USD, AUD, CAD, CHF, CNY, DKK, EUR, GBP, HKD, JPY, NZD, PLN, RUB, SEK, SGD, THB, and many more
@@ -101,7 +62,7 @@ More features:
  - Client side load balancing between three 100% redundant server nodes located in different data centers.
  - Sign Messages using your private keys (compatible with bitcoin-qt)
 
-Authors
+Original mycelium Authors
 =======
  - Jan Møller
  - Andreas Petersson
@@ -117,7 +78,7 @@ Credits
 Thanks to all collaborators who provided us with code or helped us with integrations!
 Just to name a few:
 
- - Nicolas Bacca from Ledger
+ - Nicolas Bacca from Ledgerm
  - Sipa, Marek and others from Trezor
  - Jani and Aleš from Cashila
  - Kalle Rosenbaum, Bip120/121
